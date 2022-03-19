@@ -1,4 +1,11 @@
-import { Box, Card, CardContent, Typography, useTheme } from "@mui/material";
+import {
+  Box,
+  Card,
+  CardContent,
+  Divider,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import { ShoppingCart as ShoppingCartIcon } from "@mui/icons-material";
 import { textAlign } from "@mui/system";
 import CountUp from "react-countup";
@@ -49,7 +56,7 @@ const CardItem = ({ cardColor, cardTitle }: props) => {
             background: cl?.value,
             color: "rgb(255, 255, 255)",
             borderRadius: "2px ,0, 2px ,0",
-            width: 100,
+            width: 150,
           }}
         >
           <ShoppingCartIcon sx={{ height: 38, width: 38 }} />
@@ -78,6 +85,10 @@ const CardItem = ({ cardColor, cardTitle }: props) => {
               decimal="."
               prefix="K "
             />
+          </Typography>
+          <Divider  />
+          <Typography variant="subtitle1" color="text.secondary" mt={2}>
+            2% + from Yesterday
           </Typography>
         </CardContent>
       </Box>

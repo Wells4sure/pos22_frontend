@@ -9,6 +9,9 @@ import {
 } from "@mui/material";
 import React from "react";
 import CardItem from "./CardItem";
+import SalesChart from "./SalesChart";
+import SalesData from "./SalesData";
+import TopProduct from "./TopProduct";
 
 const Dashboard = () => {
   return (
@@ -28,53 +31,16 @@ const Dashboard = () => {
         </Grid>
         {/* Chart */}
         <Grid item xs={12} md={8} lg={9}>
-          <Paper
-            sx={{
-              p: 2,
-              display: "flex",
-              flexDirection: "column",
-              height: 240,
-            }}
-          >
-            CHat
-          </Paper>
+          <SalesChart />
         </Grid>
         {/* Recent Deposits */}
         <Grid item xs={12} md={4} lg={3}>
-          <Paper
-            sx={{
-              p: 2,
-              display: "flex",
-              flexDirection: "column",
-              height: 240,
-            }}
-          >
-            <List
-              sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
-              component="nav"
-              aria-labelledby="nested-list-subheader"
-              subheader={
-                <ListSubheader component="div" id="nested-list-subheader">
-                  Top Products
-                </ListSubheader>
-              }
-            >
-              <ListItemButton
-                sx={{ display: "flex", justifyContent: "space-between" }}
-              >
-                <ListItemText primary="Mosi" />
-                <ListItemText secondary="K 1000" />
-              </ListItemButton>
-              <ListItemButton>
-                <ListItemText primary="Drafts" />
-              </ListItemButton>
-            </List>
-          </Paper>
+          <TopProduct />
         </Grid>
         {/* Recent Orders */}
         <Grid item xs={12}>
           <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-            Recent Orders
+            <SalesData />
           </Paper>
         </Grid>
       </Grid>

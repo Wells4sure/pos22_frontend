@@ -14,13 +14,22 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
-
+import { IconProps, Home, Users, BarChart } from "react-feather";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
-import { mainListItems, secondaryListItems } from "./AppBar/ListItems";
 import MuiDrawer from "@mui/material/Drawer";
 import MyAppBar from "./AppBar/AppBar";
 import FooterComponent from "../../components/FooterComponent";
+import NavItem, { SegmentType } from "./AppBar/NavItem";
+import { v4 as uuid } from "uuid";
+interface NavItemI {
+  segment?: SegmentType;
+  href: string;
+  icon: React.FC<IconProps>;
+  title: string;
+  id: string;
+  children?: NavItemI[];
+}
 
 const drawerWidth: number = 240;
 
@@ -55,6 +64,29 @@ const HomeLayout = () => {
   const toggleDrawer = () => {
     setOpen(!open);
   };
+  const NavItems: NavItemI[] = [
+    {
+      segment: "dashboard",
+      href: "/home",
+      icon: Home,
+      title: "Home",
+      id: uuid(),
+    },
+    {
+      segment: "transactions",
+      href: "/transactions",
+      icon: BarChart,
+      title: "Transactions",
+      id: uuid(),
+    },
+    {
+      segment: "users",
+      href: "/users",
+      icon: Users,
+      title: "Users",
+      id: uuid(),
+    },
+  ];
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -73,10 +105,19 @@ const HomeLayout = () => {
           </IconButton>
         </Toolbar>
         <Divider />
+
         <List component="nav">
-          {mainListItems}
-          <Divider sx={{ my: 1 }} />
-          {secondaryListItems}
+          {NavItems.map(({ id, href, title, icon, children, segment }) => (
+            <div key={id} id={id}>
+              <NavItem
+                href={href}
+                key={id}
+                title={title}
+                Icon={icon}
+                isParent
+              />
+            </div>
+          ))}
         </List>
       </Drawer>
 
