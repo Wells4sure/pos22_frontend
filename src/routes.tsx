@@ -4,6 +4,7 @@ import Dashboard from "./views/Dashboard";
 import NotFound from "./views/errors/NotFound";
 import LandingPage from "./views/LandingPage";
 import HomeLayout from "./layouts/home/HomeLayout";
+import POS from "./views/Pos/Pos";
 
 const routes = [
   {
@@ -19,12 +20,16 @@ const routes = [
     ],
   },
   {
-    path: "/home",
+    path: "/dashboard",
     element: <HomeLayout />,
     children: [
       {
-        path: "/home",
+        path: "/dashboard",
         element: <Dashboard />,
+      },
+      {
+        path: "/dashboard/pos",
+        element: <POS />,
       },
     ],
   },

@@ -1,22 +1,9 @@
-import React from "react";
-import { Outlet, useNavigate } from "react-router-dom";
-import {
-  Badge,
-  Box,
-  Button,
-  Container,
-  Divider,
-  Grid,
-  IconButton,
-  Link,
-  List,
-  Paper,
-  Toolbar,
-  Typography,
-} from "@mui/material";
-import { IconProps, Home, Users, BarChart } from "react-feather";
+import React, { useEffect } from "react";
+import { Outlet, useLocation } from "react-router-dom";
+import { Box, colors, Divider, IconButton, List, Toolbar } from "@mui/material";
+import { IconProps, Home, Users, BarChart, ShoppingCart } from "react-feather";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import MuiDrawer from "@mui/material/Drawer";
 import MyAppBar from "./AppBar/AppBar";
 import FooterComponent from "../../components/FooterComponent";
@@ -28,6 +15,7 @@ interface NavItemI {
   icon: React.FC<IconProps>;
   title: string;
   id: string;
+  isVisible?: boolean;
   children?: NavItemI[];
 }
 
@@ -53,7 +41,8 @@ const Drawer = styled(MuiDrawer, {
       }),
       width: theme.spacing(7),
       [theme.breakpoints.up("sm")]: {
-        width: theme.spacing(7),
+        backgroundColor: colors.blue[50],
+        width: theme.spacing(6),
       },
     }),
   },
@@ -67,26 +56,39 @@ const HomeLayout = () => {
   const NavItems: NavItemI[] = [
     {
       segment: "dashboard",
-      href: "/home",
+      href: "/dashboard",
       icon: Home,
       title: "Home",
       id: uuid(),
     },
     {
+      segment: "pos",
+      href: "/dashboard/pos",
+      icon: ShoppingCart,
+      title: "POS",
+      id: uuid(),
+    },
+    {
       segment: "transactions",
-      href: "/transactions",
+      href: "/dashboard/transactions",
       icon: BarChart,
       title: "Transactions",
       id: uuid(),
     },
     {
       segment: "users",
-      href: "/users",
+      href: "/dashboard/users",
       icon: Users,
       title: "Users",
       id: uuid(),
     },
   ];
+  const location = useLocation();
+  useEffect(() => {
+    return location.pathname === "/dashboard/pos"
+      ? setOpen(false)
+      : setOpen(true);
+  }, [location.pathname]);
 
   return (
     <Box sx={{ display: "flex" }}>

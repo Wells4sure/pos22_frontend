@@ -35,7 +35,7 @@ interface myAppBarI {
 }
 const MyAppBar = (props: myAppBarI) => {
   const navigate = useNavigate();
-  console.log(props.open);
+
   return (
     <AppBar position="absolute" open={props.open}>
       <Toolbar

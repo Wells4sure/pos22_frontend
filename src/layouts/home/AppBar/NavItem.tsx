@@ -3,7 +3,13 @@ import { FC, useState } from "react";
 import { IconProps } from "react-feather";
 import clsx from "clsx";
 import theme from "../../../Theme";
-import { colors, ListItem, ListItemIcon, ListItemText } from "@mui/material";
+import {
+  colors,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Tooltip,
+} from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { NavLink, useLocation } from "react-router-dom";
 
@@ -14,29 +20,32 @@ export type SegmentType =
   | "profile"
   | "Settings"
   | "Products"
-  | "POS";
+  | "pos";
 
 const useStyles = makeStyles({
-  item: {
+  root: {
     display: "flex",
-    padding: "10px 8px",
+    padding: "10px 10px",
     fontWeight: theme.typography.fontWeightMedium,
+    "&:hover": {
+      backgroundColor: colors.blue[100],
+      color: colors.blue[700],
+    },
+    active: {
+      backgroundColor: colors.orange[100],
+      color: colors.orange[700],
+      "&:hover": {
+        backgroundColor: colors.green[100],
+        color: colors.green[700],
+      },
+    },
   },
 
   title: {
     marginRight: "auto",
   },
-  active: {
-    color: "green",
-    backgroundColor: "#fff",
-    width: "100%",
-    "& $title": {
-      fontWeight: theme.typography.fontWeightMedium,
-      color: "green",
-    },
-    "& $icon": {
-      color: "green",
-    },
+  navStyle: {
+    color: "blue",
   },
 });
 
@@ -67,8 +76,8 @@ const NavItem = ({
   return (
     <ListItem
       button
+      className={clsx(classes.root, className)}
       selected={location.pathname === href ? true : false}
-      className={clsx(classes.item, className)}
       disableGutters
       onClick={() => {
         if (isParent) {
@@ -82,8 +91,10 @@ const NavItem = ({
       // eslint-disable-next-line
       {...rest}
     >
-      <ListItemIcon style={{ color: colors.green[900], marginLeft: 5 }}>
-        <Icon />
+      <ListItemIcon className={clsx(classes.navStyle)}>
+        <Tooltip title={title} placement="right">
+          <Icon />
+        </Tooltip>
       </ListItemIcon>
       <ListItemText primary={title} />
     </ListItem>
