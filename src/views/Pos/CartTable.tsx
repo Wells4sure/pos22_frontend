@@ -8,7 +8,6 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { IconButton } from "@mui/material";
-import { useTable } from "react-table";
 
 const TAX_RATE = 0.07;
 
